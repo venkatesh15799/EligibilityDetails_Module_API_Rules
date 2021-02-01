@@ -1,0 +1,23 @@
+server:
+  port: 9093
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    password: ''
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: venky15799@gmail.com
+    password: Venky@15799....
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  
