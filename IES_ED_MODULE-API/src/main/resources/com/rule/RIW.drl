@@ -1,0 +1,24 @@
+package com.rule
+
+import COM.IES.BINDING.CitizenData;
+import COM.IES.BINDING.PlanData;
+
+rule "Is Graduate"
+  when
+    ( cData: CitizenData(planName=="RIW",isGraduate==true)) and 
+    (planData: PlanData())
+  then
+     planData.setPlanStatus("APPROVED");
+     planData.setPlanStartDate("28-01-2021");
+     planData.setPlanEndDate("29-03-2023");
+     planData.setBenfitAmount(50000);
+  end
+  
+rule "No Graduate"	
+	when
+	    ( cData: CitizenData(planName=="RIW",isGraduate==false)) and 
+	    (planData: PlanData())
+	  then
+	     planData.setPlanStatus("DN");
+	     planData.setDenialReason("No kids Availble");
+	  end

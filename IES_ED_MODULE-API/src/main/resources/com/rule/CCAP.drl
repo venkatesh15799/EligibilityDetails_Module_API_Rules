@@ -1,0 +1,24 @@
+package com.rule
+
+import COM.IES.BINDING.CitizenData;
+import COM.IES.BINDING.PlanData;
+
+rule "Is Children Count is More than 0"
+  when
+    ( cData: CitizenData(planName=="CCAP",kidsCount>0)) and 
+    (planData: PlanData())
+  then
+     planData.setPlanStatus("APPROVED");
+     planData.setPlanStartDate("28-01-2021");
+     planData.setPlanEndDate("29-03-2023");
+     planData.setBenfitAmount(5000);
+  end
+  
+rule "No Children"	
+	when
+	    ( cData: CitizenData(planName=="CCAP",kidsCount<=0)) and 
+	    (planData: PlanData())
+	  then
+	    planData.setPlanStatus("DN");
+	     planData.setDenialReason("No kids Availble");
+	  end

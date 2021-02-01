@@ -1,0 +1,25 @@
+package com.rule
+
+import COM.IES.BINDING.CitizenData;
+import COM.IES.BINDING.PlanData;
+
+rule "Not an Employee"
+	when 
+		( cData: CitizenData(planName=="SNAP",isEmployed==false)) and 
+		(planData: PlanData())
+	then
+		     planData.setPlanStatus("APPROVED");
+			 planData.setPlanStartDate("28-01-2021");
+			 planData.setPlanEndDate("29-03-2023");
+			 planData.setBenfitAmount(50000);
+	end
+	
+	
+rule "Is Employee"
+	when 
+		( cData: CitizenData(planName=="SNAP",isEmployed==true)) and 
+		(planData: PlanData())
+	then
+		   planData.setPlanStatus("DN");
+			planData.setDenialReason("Salaried Employee");
+	end
